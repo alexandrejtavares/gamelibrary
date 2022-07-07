@@ -13,9 +13,10 @@
         <div class="page-header">
             <h1>{{ title }}</h1>
         </div>
-        <table class="table table-striped table-responsive table-bordered">
+        <table class="table table-striped table-responsive table-bordered" style="width: 80%;">
             <thead class="thead-default">
                 <tr>
+                    <th>&nbsp;</td>
                     <th>Name</td>
                     <th>Category</td>
                     <th>Console</td>
@@ -24,11 +25,19 @@
             <tbody>
                 {% for game in games %}
                 <tr>
+                    <td align="center" style="width: 3%;"><input type="radio" value="{{ game.name }}"
+                            name="game_selected"></td>
                     <td>{{ game.name }}</td>
                     <td>{{ game.category }}</td>
                     <td>{{ game.console }}</td>
                 </tr>
                 {% endfor %}
+                <tr>
+                    <td colspan="4" align="center">
+                        <button id="new" name="new" onclick="window.location='new'">New Game</button>
+                        <button id="delete" name="delete" onclick="window.location='delete'">Delete</button>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>
