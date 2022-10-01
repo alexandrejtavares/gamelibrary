@@ -41,7 +41,6 @@ def add():
     game_list.append(game)
     return redirect("/")
 
-<<<<<<< HEAD
 
 @app.route("/login")
 def login():
@@ -65,16 +64,15 @@ def logout():
     session["logged_user"] = None
     return redirect("/")
 
-=======
-# @app.route("/delete", methods=['POST',])
-# def add():
-#     name = request.form["name"]
-#     category = request.form["category"]
-#     console = request.form["console"]
-#     game = Game(name, category, console)
-#     game_list.append(game)
-#     return redirect("/")
->>>>>>> 4b28d6a196fc58d04f5c5d0d8d387ddb57df8256
+
+@app.route("/delete", methods=['POST',])
+def add():
+    name = request.form["name"]
+    category = request.form["category"]
+    console = request.form["console"]
+    game = Game(name, category, console)
+    game_list.append(game)
+    return redirect("/")
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', debug=True)
