@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, session, flash
 
 
 class Game:
@@ -19,6 +19,7 @@ game_list.append(game2)
 game_list.append(game3)
 
 app = Flask(__name__)
+app.secret_key = 'Pwd'
 
 
 @app.route("/")
@@ -38,6 +39,29 @@ def add():
     console = request.form["console"]
     game = Game(name, category, console)
     game_list.append(game)
+    return redirect("/")
+
+
+@app.route("/login")
+def login():
+    return render_template("login.html", title="Login")
+
+
+@app.route('/authenticate', methods=['POST', ])
+def autenticar():
+    user = request.form['user']
+    if user == 'root' and request.form['password'] == 'password':
+        session['logged_user'] = user
+        flash(f"User { user } logged successfully.", "success")
+        return redirect('/')
+    else:
+        flash("Incorrect user or password.", "warning")
+        return redirect('/login')
+
+
+@app.route("/logout")
+def logout():
+    session["logged_user"] = None
     return redirect("/")
 
 
